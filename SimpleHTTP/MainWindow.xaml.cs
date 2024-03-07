@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SimpleHTTP.Models;
+using SimpleHTTP.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,34 +27,27 @@ namespace SimpleHTTP
         public MainWindow()
         {
             InitializeComponent();
+            NavigateToMainPage();
         }
 
-        private async void Button_Click(object sender, RoutedEventArgs e)
+        private void MainPageButton_Click(object sender, RoutedEventArgs e)
         {
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri("http://localhost:5255");
-            try
-            {
-                LoginViewModel login = new LoginViewModel();
-                login.Email = "admin@gmail.com";
-                login.Password = "123456";
-                string json = JsonConvert.SerializeObject(login);
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-                var resp = await client.PostAsync("/api/account/login", content);
-                if(resp.IsSuccessStatusCode)
-                {
-                    var result = await resp.Content.ReadAsStringAsync();
-                    MessageBox.Show(result);
-                }
-                else
-                {
-                    MessageBox.Show("Помилка", resp.StatusCode.ToString()); 
-                }
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            NavigateToMainPage();
+        }
+
+        private void SecondPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            NavigateToSecondPage();
+        }
+
+        private void NavigateToMainPage()
+        {
+            mainFrame.Navigate(new MainPage());
+        }
+
+        private void NavigateToSecondPage()
+        {
+            mainFrame.Navigate(new SecondPage());
         }
     }
 }

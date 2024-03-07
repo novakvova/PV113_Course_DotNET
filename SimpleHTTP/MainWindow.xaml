@@ -7,7 +7,19 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Content="Вхід" HorizontalAlignment="Left" Margin="54,40,0,0" VerticalAlignment="Top" Click="Button_Click"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Navigation buttons -->
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top">
+            <Button Content="Main Page" Click="MainPageButton_Click"/>
+            <Button Content="Second Page" Click="SecondPageButton_Click"/>
+        </StackPanel>
+
+        <!-- Frame to host pages -->
+        <Frame x:Name="mainFrame" Grid.Row="1"/>
 
     </Grid>
 </Window>
